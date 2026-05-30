@@ -1,0 +1,24 @@
+SW-D7D71MT6EEOS72VKCS50
+
+cd d:\Desktop\zhiban\codex
+uv sync
+uv run python scripts/init_app_meta.py
+uv run uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+
+cd d:\Desktop\zhiban\codex
+.venv\Scripts\activate
+cd frontend
+npm install
+npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
+
+
+curl http://127.0.0.1:8000/health
+
+
+cd d:\Desktop\zhiban\codex
+.venv\Scripts\activate
+python scripts/init_app_meta.py
+uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+pmmXfmBYyFn2Vko0IGVKG2KPmsL896J-PZwSwE1Jvk4

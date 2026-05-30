@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人 AI 助手</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="chat-panel">
+        <header class="hero">
+          <div>
+            <p class="eyebrow">Personal Assistant</p>
+            <h1>黑白问答台</h1>
+            <p id="modeDescription" class="hero-copy"></p>
+          </div>
+          <div class="connection-pill" id="connectionStatus">等待连接</div>
+        </header>
+
+        <section class="mode-switcher" aria-label="会话模式">
+          <button class="mode-button" type="button" data-mode="sop">
+            <span>SOP</span>
+            <small>待办执行</small>
+          </button>
+          <button class="mode-button" type="button" data-mode="wechat">
+            <span>微信</span>
+            <small>消息检索</small>
+          </button>
+          <button class="mode-button is-active" type="button" data-mode="knowledge">
+            <span>知识库</span>
+            <small>RAG 问答</small>
+          </button>
+        </section>
+
+        <section class="runtime-card" aria-live="polite">
+          <div>
+            <span class="label">当前会话</span>
+            <strong id="activeSessionLabel">新会话</strong>
+          </div>
+          <div>
+            <span class="label">知识库</span>
+            <strong id="knowledgeStatus">未加载</strong>
+          </div>
+          <button id="refreshKnowledge" class="ghost-button" type="button">刷新状态</button>
+        </section>
+
+        <section id="messages" class="messages" aria-live="polite"></section>
+
+        <form id="composer" class="composer">
+          <textarea
+            id="messageInput"
+            rows="3"
+            maxlength="4000"
+            placeholder="输入问题，Enter 发送，Shift + Enter 换行"
+          ></textarea>
+          <div class="composer-actions">
+            <span id="inputHint">知识库模式将优先使用流式接口。</span>
+            <button id="sendButton" type="submit">发送</button>
+          </div>
+        </form>
+      </main>
+
+      <aside class="sessions-panel" aria-label="会话管理">
+        <section class="side-card">
+          <div class="side-header">
+            <div>
+              <p class="eyebrow">Workspace</p>
+              <h2>会话管理</h2>
+            </div>
+            <button id="newSession" class="icon-button" type="button" title="新建会话">+</button>
+          </div>
+
+          <div class="settings-grid">
+            <label>
+              <span>后端地址</span>
+              <input id="baseUrlInput" type="url" placeholder="http://localhost:8000" />
+            </label>
+            <label>
+              <span>API Key</span>
+              <input id="apiKeyInput" type="password" placeholder="APP_API_KEY" />
+            </label>
+            <label>
+              <span>User ID</span>
+              <input id="userIdInput" type="text" placeholder="local-user" />
+            </label>
+          </div>
+
+          <div class="side-actions">
+            <button id="saveSettings" type="button">保存连接</button>
+            <button id="refreshSessions" class="ghost-button" type="button">刷新会话</button>
+          </div>
+        </section>
+
+        <section class="side-card session-list-card">
+          <div class="session-list-title">
+            <h2>最近会话</h2>
+            <span id="sessionCount">0</span>
+          </div>
+          <div id="sessionsList" class="sessions-list"></div>
+        </section>
+      </aside>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
